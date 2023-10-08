@@ -161,7 +161,7 @@ class Order {
 class DatabaseUtil {
     public static Connection getConnection() throws SQLException {
         // Implement your database connection logic here
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/customerorder", "root", "");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/customerorder", "root", "Nucmed2018!");
     }
 }
 
