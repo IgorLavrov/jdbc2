@@ -161,7 +161,7 @@ class Order {
 class DatabaseUtil {
     public static Connection getConnection() throws SQLException {
         // Implement your database connection logic here
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/customerorder", "root", "Nucmed2018!");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/customerorder", "root", "");
     }
 }
 
@@ -203,7 +203,7 @@ class CustomerDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
         return customers;
     }
@@ -224,9 +224,9 @@ class CustomerDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
-        return null; // Customer not found
+        return null;
     }
 
     public void updateCustomer(Customer customer) {
@@ -240,7 +240,7 @@ class CustomerDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 
@@ -252,7 +252,7 @@ class CustomerDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 }
@@ -274,7 +274,7 @@ class ProductDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 
@@ -293,7 +293,7 @@ class ProductDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
         return products;
     }
@@ -313,9 +313,9 @@ class ProductDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
-        return null; // Product not found
+        return null;
     }
 
     public void updateProduct(Product product) {
@@ -328,7 +328,7 @@ class ProductDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 
@@ -340,7 +340,7 @@ class ProductDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 }
@@ -360,15 +360,15 @@ class OrderDAO {
 
             preparedStatement.executeUpdate();
 
-            // Retrieve the auto-generated order ID
+
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int orderId = generatedKeys.getInt(1);
-                // Handle the generated order ID as needed
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 
@@ -380,12 +380,12 @@ class OrderDAO {
 
             while (resultSet.next()) {
                 Order order = new Order();
-                // Populate order fields as needed
+
                 orders.add(order);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
         return orders;
     }
@@ -398,14 +398,14 @@ class OrderDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 Order order = new Order();
-                // Populate order fields as needed
+
                 return order;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
-        return null; // Order not found
+        return null;
     }
 
     public void updateOrder(Order order) {
@@ -418,7 +418,7 @@ class OrderDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 
@@ -438,17 +438,17 @@ class OrderDAO {
 class Main {
     public static void main(String[] args) {
         try {
-            // Initialize database connection
+
             Connection connection = DatabaseUtil.getConnection();
 
-            // Create DAO instances
+
             CustomerDAO customerDAO = new CustomerDAO(connection);
             ProductDAO productDAO = new ProductDAO(connection);
             OrderDAO orderDAO = new OrderDAO(connection);
 
-            // Initialize customer data with a registration code
+
             Customer newCustomer = new Customer();
-            newCustomer.setRegistrationCode("ABC123"); // Set a valid registration code
+            newCustomer.setRegistrationCode("ABC123");
             newCustomer.setFullName("John Doe");
             newCustomer.setEmail("john@example.com");
             newCustomer.setTelephone("123-456-7890");
@@ -456,18 +456,16 @@ class Main {
             customerDAO.createCustomer(newCustomer);
 
             List<Customer> customers = customerDAO.getAllCustomers();
-            // Handle retrieved customers as needed
+
 
             Customer customerById = customerDAO.getCustomerById("customer_id");
-            // Handle retrieved customer as needed
 
-            // Similar operations for products and orders
 
-            // Close the database connection
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database-related exceptions
+
         }
     }
 }
